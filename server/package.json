@@ -1,0 +1,24 @@
+{
+  "name": "metarank-demo-server",
+  "version": "0.0.1",
+  "description": "Metarank demo backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./dist/app.js"
+  },
+  "author": "Vsevolod Goloviznin <vsevolod.goloviznin@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^16.9.0",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "^2.24.0",
+    "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "fastify": "^3.21.0",
+    "fastify-cors": "^6.0.2"
+  }
+}
