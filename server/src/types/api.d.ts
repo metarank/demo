@@ -1,0 +1,3 @@
+interface IIDParams {
+  id: string;
+}
