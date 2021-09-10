@@ -13,4 +13,4 @@ fastifyInstance.register(cors, {
 
 routes(fastifyInstance);
 
-fastifyInstance.listen(PORT, () => console.log(`Listening API on ${PORT}...`));
+fastifyInstance.listen(PORT, () => console.log(`Listening API on ${PORT}`));
