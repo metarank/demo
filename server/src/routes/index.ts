@@ -1,16 +1,16 @@
 import { FastifyInstance, FastifySchema } from 'fastify';
 import { Type } from '@sinclair/typebox';
 import { getSimilar, getMovies } from '../services/db';
-import { SimilarMovieModel, MovieModel } from '../models/movie';
+import { MovieDataModel } from '../models/movie';
 import { IIDModel, IIDType } from '../models/api';
 
 const similarMovieSchema: FastifySchema = {
   params: IIDModel,
-  response: { 200: Type.Array(SimilarMovieModel) },
+  response: { 200: Type.Array(MovieDataModel) },
 };
 
 const moviesSchema: FastifySchema = {
-  response: { 200: Type.Array(MovieModel) },
+  response: { 200: Type.Array(MovieDataModel) },
 };
 
 function routes(fastifyInstance: FastifyInstance): void {
