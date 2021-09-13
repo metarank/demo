@@ -13,6 +13,15 @@ export const MovieModel = Type.Object({
   similar: Type.Array(SimilarMovieModel),
 });
 
+export const MovieDataModel = Type.Object({
+  id: Type.Number(),
+  title: Type.String(),
+  image_url: Type.String(),
+});
+
+export type MovieDataModelType = Static<typeof MovieDataModel>;
+export type MovieDataStorageModelType = { [index: string]: MovieDataModelType };
+
 export type MovieType = Static<typeof MovieModel>;
 export type SimilarMovieType = Static<typeof SimilarMovieModel>;
 
