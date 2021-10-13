@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,11 +6,13 @@ import {
 
 import Header from '../Header';
 import Home from '../../pages/Home';
+import * as Styled from './components';
 
-export default function Layout() {
+export default () => {
   return (
-    <div className="space-y-20 sm:space-y-32 md:space-y-40 lg:space-y-44 overflow-hidden">
-      <div className="relative z-10 max-w-screen-lg xl:max-w-screen-xl mx-auto">
+    <>
+      <Styled.Global />
+      <Styled.Container>
         <Header />
         <Router>
           <Switch>
@@ -20,7 +21,7 @@ export default function Layout() {
             </Route>
           </Switch>
         </Router>
-      </div>
-    </div>
+      </Styled.Container>
+    </>
   );
 }

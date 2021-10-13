@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Layout from './components/Layout';
 
-import './index.css';
-
+import 'normalize.css';
+ 
 ReactDOM.render(
   <React.StrictMode>
     <Layout />

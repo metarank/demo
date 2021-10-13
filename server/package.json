@@ -4,7 +4,8 @@
   "description": "Metarank demo backend",
   "main": "app.js",
   "scripts": {
-    "start": "node ./dist/app.js"
+    "start": "node ./dist/app.js", 
+    "build": "tsc"
   },
   "author": "Vsevolod Goloviznin <vsevolod.goloviznin@gmail.com>",
   "license": "Apache-2.0",

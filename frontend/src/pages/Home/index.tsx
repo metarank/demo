@@ -1,13 +1,54 @@
-export default function Home() {
+import { useCallback, useEffect, useState } from 'react';
+import api from '../../lib/api';
+import * as Styled from './components';
+import MovieItem, { Movie } from '../../components/Movie'
+
+export default () => {
+  const [items, setItems] = useState<Movie[]>([]);
+  const [cache, setCache] = useState<Movie[]>([]);
+
+  useEffect(() => {
+    api.get<Movie[]>('/movies').then((response) => setItems(response.data));
+  }, []);
+
+  const onClickItem = useCallback((item) => {
+    setCache(c => [...c, item])
+    api.get<Movie[]>(`/movies/${item.id}/similar`).then((response) => setItems(response.data));
+  }, [])
+
   return (
-    <div className="px-4 sm:px-6 md:px-8 mb-14 sm:mb-20 xl:mb-8">
-      <p className="text-4xl sm:text-6xl lg:text-7xl leading-none font-extrabold tracking-tight text-gray-900 mt-10 mb-8 sm:mt-14 sm:mb-10 lg:mr-10">
-        Marketing slogan and description of metarank goes here
-      </p>
-      <p className="max-w-screen-lg text-gray-500 text-lg sm:text-2xl sm:leading-10 font-medium mb-10 sm:mb-11">
-        Some words about demo and how it could be used are written here... <br /> two lines will be good!
-      </p>
-      <div className="mb-6" />
-    </div>
+    <>
+      <Styled.Container>
+        <Styled.Title>MetaRank</Styled.Title>
+        <Styled.Description>
+          Marketing slogan and description of metarank goes here
+        </Styled.Description>
+        <Styled.Description>
+          Some words about demo and how it could be used are written here... <br /> two lines will be good!
+        </Styled.Description>
+      </Styled.Container>
+      <Styled.ItemsList>
+        {
+          cache.map((item) =>
+          <MovieItem
+            key={item.id}
+            {...item}
+          />
+          )
+        }
+      </Styled.ItemsList>
+      <hr />
+      <Styled.ItemsList>
+        {
+          items.map((item) =>
+            <MovieItem
+              key={item.id}
+              onClick={onClickItem}
+              {...item}
+            />
+          )
+        }
+      </Styled.ItemsList>
+    </>
   );
 }
