@@ -7,10 +7,15 @@ const PORT = process.env.PORT || 3000;
 
 const fastifyInstance = fastify.fastify();
 
-fastifyInstance.register(cors, {
-  origin: '*'
-});
+async function main() {
+  await fastifyInstance.register(cors, {
+    origin: '*',
+  });
 
-routes(fastifyInstance);
+  routes(fastifyInstance);
 
-fastifyInstance.listen(PORT, () => console.log(`Listening API on ${PORT}`));
+  fastifyInstance.listen(PORT, () => console.log(`Listening API on ${PORT}`));
+}
+
+// eslint-disable-next-line no-void
+void main();
