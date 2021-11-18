@@ -1,4 +1,4 @@
-import movieDB from '../../../assets/movies_with_images.json';
+import movieDB from '../../../assets/movies.json';
 import topTags from '../../../assets/top_tags.json';
 import {
   MovieDataStorageModelType,
@@ -19,7 +19,7 @@ function getRandomTag(): string {
 }
 
 export function getMovies(tag?: string, limit?: number): MovieResponseType {
-  const tagToUse = tag || getRandomTag();
+  const tagToUse = (!tag || tag === 'Random') ? getRandomTag() : tag;
 
   const toPersonalize = typedDB
     .filter((f) => f.tags.includes(tagToUse))

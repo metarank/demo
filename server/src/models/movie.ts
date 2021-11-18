@@ -1,13 +1,6 @@
 /* eslint-disable new-cap */
 import { Static, Type } from '@sinclair/typebox';
 
-const imageModel = Type.Object({
-  file_path: Type.String(),
-  iso_639_1: Type.Optional(Type.String()),
-  width: Type.Number(),
-  height: Type.Number(),
-});
-
 const personModel = Type.Object({
   gender: Type.Number(),
   id: Type.Number(),
@@ -35,10 +28,7 @@ export const MovieModel = Type.Object({
   tmdbVoteCount: Type.Number(),
   topActors: Type.Array(personModel),
   writer: Type.Union([Type.Null(), Type.Optional(personModel)]),
-  images: Type.Object({
-    backdrop: Type.Optional(Type.Array(imageModel)),
-    logos: Type.Array(imageModel),
-  }),
+  poster: Type.String(),
 });
 
 export const MovieResponse = Type.Object({
