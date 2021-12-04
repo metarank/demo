@@ -3,7 +3,7 @@ import cors from 'fastify-cors';
 
 import routes from './routes';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const fastifyInstance = fastify.fastify();
 
