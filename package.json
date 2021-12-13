@@ -1,0 +1,19 @@
+{
+  "name": "metarank",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "server"
+  ],
+  "scripts": {
+    "start": "concurrently -k \"yarn start:client\" \"yarn start:server\"",
+    "start:client": "yarn workspace frontend start",
+    "build:client": "yarn workspace frontend build",
+    "start:server": "yarn workspace server start",
+    "build:server": "yarn workspace server build"
+  },
+  "devDependencies": {
+    "concurrently": "^6.4.0"
+  }
+}
