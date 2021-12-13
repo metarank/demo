@@ -46,6 +46,7 @@ export default () => {
         </Styled.Description>
       </Styled.Container>
       <Styled.ItemsList>
+        <Styled.SubTitle>Clicked movies</Styled.SubTitle>
         {
           cache?.map((item) =>
             <MovieItem
@@ -56,17 +57,32 @@ export default () => {
         }
       </Styled.ItemsList>
       <hr />
-      <Styled.ItemsList>
-        {
-          response?.movies.map((item) =>
-            <MovieItem
-              key={item.id}
-              onClick={onClickItem}
-              item={item}
-            />
-          )
-        }
-      </Styled.ItemsList>
+      <Styled.Container>
+        <Styled.SubTitle>Personalized movies</Styled.SubTitle>
+        <Styled.ItemsList>
+          {
+            response?.personalized_movies.map((item) =>
+              <MovieItem
+                key={item.id}
+                onClick={onClickItem}
+                item={item}
+              />
+            )
+          }
+        </Styled.ItemsList>
+
+        <Styled.SubTitle>Static movies</Styled.SubTitle>
+        <Styled.ItemsList>
+          {
+            response?.movies.map((item) =>
+              <MovieItem
+                key={`static-${item.id}`}
+                item={item}
+              />
+            )
+          }
+        </Styled.ItemsList>
+      </Styled.Container>
     </>
   );
 }

@@ -34,6 +34,7 @@ export const MovieModel = Type.Object({
 export const MovieResponse = Type.Object({
   tag: Type.String(),
   movies: Type.Array(MovieModel),
+  personalized_movies: Type.Array(MovieModel),
 });
 
 export const MovieModelStorage = Type.Array(MovieModel);
