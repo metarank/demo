@@ -1,31 +1,52 @@
+/* eslint-disable new-cap */
 import { Static, Type } from '@sinclair/typebox';
 
-export const SimilarMovieModel = Type.Object({
+const personModel = Type.Object({
+  gender: Type.Number(),
   id: Type.Number(),
-  score: Type.Number(),
-  title: Type.String(),
+  popularity: Type.Number(),
+  name: Type.String(),
 });
 
 export const MovieModel = Type.Object({
+  budget: Type.Number(),
+  director: personModel,
+  genres: Type.Array(Type.Object({
+    id: Type.Number(),
+    name: Type.String(),
+  })),
   id: Type.Number(),
+  overview: Type.String(),
+  releaseDate: Type.Number(),
+  revenue: Type.Number(),
+  runtime: Type.Number(),
+  tags: Type.Array(Type.String()),
   title: Type.String(),
-  tmdb: Type.String(),
-  similar: Type.Array(SimilarMovieModel),
+  tmdbId: Type.Number(),
+  tmdbPopularity: Type.Number(),
+  tmdbVoteAverage: Type.Number(),
+  tmdbVoteCount: Type.Number(),
+  topActors: Type.Array(personModel),
+  writer: Type.Union([Type.Null(), Type.Optional(personModel)]),
+  poster: Type.String(),
 });
 
-export const MovieDataModel = Type.Object({
-  id: Type.Number(),
-  title: Type.String(),
-  image_url: Type.String(),
+export const MovieResponse = Type.Object({
+  tag: Type.String(),
+  movies: Type.Array(MovieModel),
 });
 
-export type MovieDataModelType = Static<typeof MovieDataModel>;
-export type MovieDataStorageModelType = { [index: string]: MovieDataModelType };
+export const MovieModelStorage = Type.Array(MovieModel);
+
+export type MovieDataStorageModelType = Static<typeof MovieModelStorage>;
 
 export type MovieType = Static<typeof MovieModel>;
-export type SimilarMovieType = Static<typeof SimilarMovieModel>;
+
+export type TopTagsType = string[];
+
+export type MovieResponseType = Static<typeof MovieResponse>;
 
 export default {
-  SimilarMovieModel,
+  MovieModelStorage,
   MovieModel,
 };

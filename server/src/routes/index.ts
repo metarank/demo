@@ -1,29 +1,18 @@
 import { FastifyInstance, FastifySchema } from 'fastify';
-import { Type } from '@sinclair/typebox';
-import { getSimilar, getMovies } from '../services/db';
-import { MovieDataModel } from '../models/movie';
-import { IIDModel, IIDType } from '../models/api';
-
-const similarMovieSchema: FastifySchema = {
-  params: IIDModel,
-  response: { 200: Type.Array(MovieDataModel) },
-};
+import { getMovies } from '../services/db';
+import { GetMoviesQuerystringParams, GetMoviesQuerystringParamsType } from '../models/api';
+import { MovieResponse } from '../models/movie';
 
 const moviesSchema: FastifySchema = {
-  response: { 200: Type.Array(MovieDataModel) },
+  querystring: GetMoviesQuerystringParams,
+  response: { 200: MovieResponse },
 };
 
 function routes(fastifyInstance: FastifyInstance): void {
-  fastifyInstance.get('/movies', { schema: moviesSchema }, async (_eq, res) => {
-    const movies = getMovies();
+  fastifyInstance.get<{ Querystring: GetMoviesQuerystringParamsType }>('/movies', { schema: moviesSchema }, async (req, res) => {
+    const movies = getMovies(req.query.tag, req.query.limit);
 
     return res.send(movies);
-  });
-
-  fastifyInstance.get<{ Params: IIDType }>('/movies/:id/similar', { schema: similarMovieSchema }, async (req, res) => {
-    const similar = getSimilar(req.params.id);
-
-    return res.send(similar);
   });
 
   fastifyInstance.get('/', async (_req, res) => res.send({ msg: 'Hello from Metarank Demo!' }));

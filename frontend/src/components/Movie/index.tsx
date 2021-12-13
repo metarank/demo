@@ -1,31 +1,23 @@
 import { useCallback } from 'react';
 import * as Styled from './components';
+import { MovieType } from '../../../../server/src/models/movie';
 
-export type Movie = {
-  id: number,
-  image_url: string,
-  title: string,
+function getImageUrl(item: MovieType): string {
+  return item && item.poster || '';
 }
 
 export default ({
-  id,
-  image_url,
-  title,
+  item,
   onClick
-}: Movie & {
-  onClick?: (item: Movie) => void
+}: {item: MovieType} & {
+  onClick?: (item: MovieType) => void
 }) => {
   const handleClick = useCallback(() => {
-    onClick && onClick({
-      id,
-      image_url,
-      title,
-    })
+    onClick && onClick(item)
   }, [])
   return (
     <Styled.Wrap onClick={handleClick} disabled={!onClick}>
-      <Styled.Container style={{ backgroundImage: `url(${image_url})` }}>
-
+      <Styled.Container style={{ backgroundImage: `url(${getImageUrl(item)})` }}>
       </Styled.Container>
     </Styled.Wrap>
   );

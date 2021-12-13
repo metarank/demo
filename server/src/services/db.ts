@@ -1,22 +1,37 @@
-import similar from '../../../similar.json';
-import movies from '../../../movies.json';
-import { MovieType, MovieDataStorageModelType, MovieDataModelType } from '../models/movie';
+import movieDB from '../../../assets/movies.json';
+import topTags from '../../../assets/top_tags.json';
+import {
+  MovieDataStorageModelType,
+  TopTagsType,
+  MovieResponseType,
+} from '../models/movie';
 
-const similarDB = similar as unknown as MovieType[];
-const moviesDB = movies as unknown as MovieDataStorageModelType;
+const typedDB = movieDB as unknown as MovieDataStorageModelType;
+const typedTags = topTags as unknown as TopTagsType;
 
-export function getSimilar(id: number): MovieDataModelType[] {
-  const movie = similarDB.find((f) => f.id === id);
-
-  if (!movie) {
-    return [];
-  }
-
-  return movie.similar.map((m) => moviesDB[m.id.toString()]);
+function getRandomNumber(x: number): number {
+  return Math.floor(Math.random() * x);
 }
 
-export function getMovies(limit = 10): MovieDataModelType[] {
-  return similarDB.slice(0, limit).map((m) => moviesDB[m.id.toString()]);
+function getRandomTag(): string {
+  const randomID = getRandomNumber(typedTags.length);
+  return typedTags[randomID];
 }
 
-export default { getSimilar, getMovies };
+export function getMovies(tag?: string, limit?: number): MovieResponseType {
+  const tagToUse = (!tag || tag === 'Random') ? getRandomTag() : tag;
+
+  const toPersonalize = typedDB
+    .filter((f) => f.tags.includes(tagToUse))
+    .sort((a, b) => b.tmdbPopularity - a.tmdbPopularity)
+    .slice(0, 100);
+
+  const movies = toPersonalize.slice(0, limit || 10);
+
+  return {
+    tag: tagToUse,
+    movies,
+  };
+}
+
+export default { getMovies };
