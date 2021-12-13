@@ -27,10 +27,12 @@ export function getMovies(tag?: string, limit?: number): MovieResponseType {
     .slice(0, 100);
 
   const movies = toPersonalize.slice(0, limit || 10);
+  const personalized = toPersonalize.slice(0, limit || 10);
 
   return {
     tag: tagToUse,
     movies,
+    personalized_movies: personalized,
   };
 }
 
