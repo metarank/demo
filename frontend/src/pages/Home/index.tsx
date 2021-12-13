@@ -34,7 +34,7 @@ export default () => {
           <br />
           You can select one of the tags (or get a random one) to see the personalized selection of movies. The actions you take will diretly affect the result you see, as well as the features that are computed in real-time by Metarank.
           <br />
-          We automatically generate a unique user ID and store it in local storage, so you can compare you personalized results with default ones in incognito mode of the browser.
+          You can compare personalized results with non-personalized directly on the page.
           <br />
           Don't hesitate to reach out to us if you have any questions or are interested in how Metarank can solve your problems!
         </Styled.Description>
