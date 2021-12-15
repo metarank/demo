@@ -29,12 +29,20 @@ export const MovieModel = Type.Object({
   topActors: Type.Array(personModel),
   writer: Type.Union([Type.Null(), Type.Optional(personModel)]),
   poster: Type.String(),
+  personalization_score: Type.Number(),
+  features: Type.Array(Type.Object({
+    name: Type.Optional(Type.String()),
+    value: Type.Optional(Type.Number()),
+    names: Type.Optional(Type.Array(Type.String())),
+    values: Type.Optional(Type.Array(Type.Number())),
+  })),
 });
 
 export const MovieResponse = Type.Object({
   tag: Type.String(),
   movies: Type.Array(MovieModel),
   personalized_movies: Type.Array(MovieModel),
+  id: Type.String(),
 });
 
 export const MovieModelStorage = Type.Array(MovieModel);

@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import movieDB from '../../../assets/movies.json';
 import topTags from '../../../assets/top_tags.json';
 import {
@@ -5,6 +6,7 @@ import {
   TopTagsType,
   MovieResponseType,
 } from '../models/movie';
+import { rank } from './metarank';
 
 const typedDB = movieDB as unknown as MovieDataStorageModelType;
 const typedTags = topTags as unknown as TopTagsType;
@@ -18,21 +20,25 @@ function getRandomTag(): string {
   return typedTags[randomID];
 }
 
-export function getMovies(tag?: string, limit?: number): MovieResponseType {
+export async function getMovies(user: string, session: string, tag?: string, limit?: number): Promise<MovieResponseType> {
   const tagToUse = (!tag || tag === 'Random') ? getRandomTag() : tag;
+  const id = v4();
 
   const toPersonalize = typedDB
     .filter((f) => f.tags.includes(tagToUse))
     .sort((a, b) => b.tmdbPopularity - a.tmdbPopularity)
     .slice(0, 100);
 
+  const ranked = await rank(user, session, id, toPersonalize);
+
   const movies = toPersonalize.slice(0, limit || 10);
-  const personalized = toPersonalize.slice(0, limit || 10);
+  const personalized = ranked.slice(0, limit || 10);
 
   return {
     tag: tagToUse,
     movies,
     personalized_movies: personalized,
+    id,
   };
 }
 

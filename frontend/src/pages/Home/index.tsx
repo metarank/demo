@@ -5,21 +5,27 @@ import MovieItem from '../../components/Movie'
 import { MovieResponseType, MovieType } from '../../../../server/src/models/movie';
 import Dropdown from '../../components/Utils/Dropdown';
 
+const user = (Math.random() + 1).toString(36).substring(7);
+const session = (Math.random() + 1).toString(36).substring(7);
+
 export default () => {
   const [response, setItems] = useState<MovieResponseType>();
   const [cache, setCache] = useState<MovieType[]>([]);
 
   useEffect(() => {
-    api.get<MovieResponseType>('/movies').then((response) => setItems(response.data));
+    api.get<MovieResponseType>(`/movies?user=${user}&session=${session}`).then((response) => setItems(response.data));
   }, []);
 
-  const onClickItem = useCallback((item: MovieType) => {
-    setCache(c => [...c, item])
-    api.get<MovieResponseType>(`/movies`).then((response) => setItems(response.data));
+  const onClickItem = useCallback(async (id: string, tag: string, item: MovieType) => {
+    setCache(c => [...c, item]);
+
+    await api.post(`/click`, { user, session, item: item.id.toString(), ranking: id });
+
+    api.get<MovieResponseType>(`/movies?user=${user}&session=${session}&tag=${tag}`).then((response) => setItems(response.data));
   }, [])
 
   const onClickDropdown = useCallback((tag: string) => {
-    api.get<MovieResponseType>(`/movies?tag=${tag}`).then((response) => setItems(response.data));
+    api.get<MovieResponseType>(`/movies?user=${user}&session=${session}&tag=${tag}`).then((response) => setItems(response.data));
   }, [])
 
   return (
@@ -50,7 +56,7 @@ export default () => {
         {
           cache?.map((item) =>
             <MovieItem
-              key={item.id}
+              key={`cached-${item.id}`}
               item={item}
             />
           )
@@ -64,8 +70,9 @@ export default () => {
             response?.personalized_movies.map((item) =>
               <MovieItem
                 key={item.id}
-                onClick={onClickItem}
                 item={item}
+                onClick={() => onClickItem(response.id, response.tag, item)}
+                id={response.id}
               />
             )
           }

@@ -8,16 +8,20 @@ function getImageUrl(item: MovieType): string {
 
 export default ({
   item,
+  id,
   onClick
-}: {item: MovieType} & {
-  onClick?: (item: MovieType) => void
+}: {
+  item: MovieType,
+  id?: string,
+  onClick?: (id: string, item: MovieType) => Promise<void>
 }) => {
   const handleClick = useCallback(() => {
-    onClick && onClick(item)
+    onClick && id && onClick(id, item)
   }, [])
   return (
     <Styled.Wrap onClick={handleClick} disabled={!onClick}>
       <Styled.Container style={{ backgroundImage: `url(${getImageUrl(item)})` }}>
+        {id && item.features.map((m) => <div>{m.name || m.names?.join(',')}: {m.values?.join(',') || m.value}</div>)}
       </Styled.Container>
     </Styled.Wrap>
   );
