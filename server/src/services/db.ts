@@ -6,7 +6,7 @@ import {
   TopTagsType,
   MovieResponseType,
 } from '../models/movie';
-import { rank } from './metarank';
+import { rank, rankFeedback } from './metarank';
 
 const typedDB = movieDB as unknown as MovieDataStorageModelType;
 const typedTags = topTags as unknown as TopTagsType;
@@ -33,6 +33,8 @@ export async function getMovies(user: string, session: string, tag?: string, lim
 
   const movies = toPersonalize.slice(0, limit || 10);
   const personalized = ranked.slice(0, limit || 10);
+
+  await rankFeedback(user, session, id, personalized.map((item) => ({ id: item.id.toString(), relevancy: item.personalization_score })));
 
   return {
     tag: tagToUse,

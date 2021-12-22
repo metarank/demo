@@ -40,3 +40,14 @@ type MetarankClickRequest = {
   type: 'click',
   tenant: 'default'
 };
+
+type MetarankRankFeedbackRequest = {
+  event: 'ranking',
+  fields: [],
+  id: string,
+  session: string,
+  user: string,
+  timestamp: number,
+  tenant: 'default',
+  items: MetarankRankItem[]
+};

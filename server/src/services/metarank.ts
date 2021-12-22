@@ -55,4 +55,19 @@ export async function click(user: string, session: string, ranking: string, item
   await axios.post(`${METARANK_URL}/feedback`, data);
 }
 
+export async function rankFeedback(user: string, session: string, ranking: string, items: MetarankRankItem[]): Promise<void> {
+  const data: MetarankRankFeedbackRequest = {
+    id: ranking,
+    user,
+    session,
+    items,
+    timestamp: +Date.now(),
+    fields: [],
+    tenant: 'default',
+    event: 'ranking',
+  };
+
+  await axios.post(`${METARANK_URL}/feedback`, data);
+}
+
 export default { rank };
