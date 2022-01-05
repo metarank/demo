@@ -9,11 +9,14 @@ We also use [Yarn](https://yarnpkg.com/) for package management (`npm i -g yarn`
 
 ## Running
 
-- install the packages in the `frontend` and `server` folders
--- `cd frontend && npm i`
--- `cd server && npm i`
-- run the backend
--- provide .env file with link to your metarank installation or use an environment variable for it
--- `cd server && npm run start`. By default the backend will start on port 3001, so make sure that this port is empty or provide a different one via `PORT` environemnt variable.
-- run the frontend
--- `cd frontend && npm run start`. By default the frontend will run on port 3000.
+### install the packages in the `frontend` and `server` folders
+* `cd frontend && npm i`
+* `cd server && npm i`
+
+### run the backend
+* use `METARANK_URL` environment variable to provide the URL of your Metarank installation in the format `http://localhost:8080`
+* use `PORT` environment vvaraible to provide the port on which API will run. By default port 3001 is used
+* `cd server && npm run start` to run application
+
+### run the frontend
+* `cd frontend && npm run start`. By default the frontend will run on port 3000

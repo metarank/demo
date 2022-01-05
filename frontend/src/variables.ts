@@ -1,5 +1,5 @@
 export const CSS = {
-  'base': '#475971',
+  'base': '#141516',
   'base-dark': '#2F3B4B',
   'base-darker': '#1F2732',
   'hightlight:': '#5CA6EB',

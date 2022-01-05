@@ -14,6 +14,13 @@ async function main() {
 
   routes(fastifyInstance);
 
+  fastifyInstance.setErrorHandler(async (error, _, res) => {
+    console.error(error);
+
+    // generic error
+    await res.code(500);
+  });
+
   fastifyInstance.listen(PORT, () => console.log(`Listening API on ${PORT}`));
 }
 
