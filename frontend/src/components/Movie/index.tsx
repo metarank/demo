@@ -20,7 +20,7 @@ export default ({
   disabled?: boolean
 }) => {
   const [meta, _stats] = useMemo(() =>
-    item.features.reduce((acc: any, i) => {
+    item.features.reduce((acc: any, i: any) => {
       acc[i.name ? 0 : 1].push(i);
       return acc
     }, [[], []]),
