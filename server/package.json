@@ -4,8 +4,8 @@
   "description": "Metarank demo backend",
   "main": "src/app.js",
   "scripts": {
-    "start": "npm run build && node ./dist/server/src/app.js",
-    "build": "npm i && ./node_modules/.bin/tsc"
+    "start": "node ./dist/src/app.js",
+    "build": "yarn && rm -rf dist && ./node_modules/.bin/tsc -p ."
   },
   "author": "Vsevolod Goloviznin <vsevolod.goloviznin@gmail.com>",
   "license": "Apache-2.0",
