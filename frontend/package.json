@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "./node_modules/.bin/react-scripts start",
-    "build": "./node_modules/.bin/react-scripts build",
+    "build": "yarn && ./node_modules/.bin/react-scripts build",
     "test": "./node_modules/.bin/react-scripts test",
     "eject": "./node_modules/.bin/react-scripts eject"
   },
@@ -22,6 +22,7 @@
     ]
   },
   "dependencies": {
+    "@sinclair/typebox": "^0.23.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -36,9 +37,9 @@
     "react-feather": "^2.0.9",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
+    "styled-components": "^5.3.1",
     "typescript": "^4.4.3",
-    "web-vitals": "^1.1.2",
-    "styled-components": "^5.3.1"
+    "web-vitals": "^1.1.2"
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.0",

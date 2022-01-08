@@ -66,7 +66,7 @@ export default () => {
       <Styled.CompareContainer comparing={comparing}>
         <Styled.ItemsList comparing={comparing}>
           {
-            response?.personalized_movies.map((item) =>
+            response?.personalized_movies.map((item: any) =>
               <MovieItem
                 key={item.id}
                 item={item}
@@ -82,7 +82,7 @@ export default () => {
             <Styled.Divider />
             <Styled.ItemsList comparing={true}>
               {
-                response?.movies.map((item) =>
+                response?.movies.map((item: any) =>
                   <MovieItem
                     disabled
                     key={`static-${item.id}`}

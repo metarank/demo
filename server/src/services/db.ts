@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
-import movieDB from '../../../assets/movies.json';
-import topTags from '../../../assets/top_tags.json';
+import movieDB from '../../assets/movies.json';
+import topTags from '../../assets/top_tags.json';
 import {
   MovieDataStorageModelType,
   TopTagsType,
