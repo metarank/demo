@@ -7,6 +7,15 @@ This is a demo outlining how you can use Metarank in real-world scenarios. The c
 The demo project utilizes [Node.js](https://nodejs.org) for the backend and [ReactJS](https://reactjs.org/) for the frontend, so you must have [Node.js](https://nodejs.org/) installed in order to run the project.
 We also use [Yarn](https://yarnpkg.com/) for package management (`npm i -g yarn` for quick install).
 
+## Running using Docker
+
+You can easily run the project with `docker-compose`:
+
+* run `docker-compose buiild` to build the images
+* run `METARANK_URL=SOME-URL docker-compose up` to run the images
+
+You can access the frontend application at `localhost:3000` when both containers are running.
+
 ## Running using yarn workspaces
 
 Both frontend and api projects are wrapped in yarn workspace, so you can run both projects using one yarn command.
