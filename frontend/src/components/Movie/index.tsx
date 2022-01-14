@@ -1,24 +1,31 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useRef, useEffect, useState } from 'react';
 import * as Styled from './components';
 import { MovieType } from '../../../../server/src/models/movie';
-import { ArrowUpCircle, Sliders } from 'react-feather';
+import { ArrowUpCircle, ChevronsUp, Sliders } from 'react-feather';
 
 function getImageUrl(item: MovieType): string {
   return item && item.poster || '';
 }
 
 const statFields = ['']
+
 export default ({
   item,
   id,
   onClick,
   disabled = false,
+  index
 }: {
   item: MovieType,
   id?: string,
   onClick?: (id: string, item: MovieType) => Promise<void>,
-  disabled?: boolean
+  disabled?: boolean,
+  index?: number
 }) => {
+  const _index = useRef(index)
+
+  const [changedPosition, setChangedPosition] = useState(0)
+
   const [meta, _stats] = useMemo(() =>
     item.features.reduce((acc: any, i: any) => {
       acc[i.name ? 0 : 1].push(i);
@@ -34,10 +41,17 @@ export default ({
     return acc;
   }, {})
 
-  console.log(stats);
-  const handleClick = useCallback(() => {
+  const handleClick = useCallback((e) => {
+    console.log(e)
+    if (e.defaultPrevented) return
     onClick && id && onClick(id, item)
   }, [])
+
+  useEffect(() => {
+    if (_index.current === index) return
+    setChangedPosition(_index.current > index ? 1 : -1)
+    setTimeout(() => setChangedPosition(0), 2000)
+  }, [index])
   return (
     <Styled.Wrap onClick={handleClick} disabled={!onClick}>
       <Styled.Container style={{ backgroundImage: `url(${getImageUrl(item)})` }}>
@@ -49,9 +63,15 @@ export default ({
               <ArrowUpCircle width={60} height={60} />
               <span>Promote</span>
             </Styled.Hover>
-            <Styled.Info>
+            <Styled.Info onClick={(e) => e.preventDefault()}>
               <Sliders width={15} height={15} />
             </Styled.Info>
+            {
+              !!changedPosition &&
+              <Styled.PositionUpdater up={changedPosition > 0}>
+                <ChevronsUp width={60} height={60} />
+              </Styled.PositionUpdater>
+            }
             <Styled.Explain> 
               <div>
                 <h4>Rank:</h4>

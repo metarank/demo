@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 
 export const Wrap = styled.button`
@@ -26,6 +26,59 @@ export const Hover = styled.div`
   transition: opacity .2s ease-in;
   text-transform: uppercase;
   font-size: 12px;
+`
+
+const pulseGreen = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(0, 255, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 0, 0);
+  }
+`
+
+const pulseRed = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(241, 40, 6, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(241, 40, 6, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 40, 6, 0);
+  }
+`
+
+const bounce = keyframes`
+  0%   { transform: scale(1,1)    translateY(0); }
+  10%  { transform: scale(1.1,.9) translateY(0); }
+  30%  { transform: scale(.9,1.1) translateY(-20px); }
+  50%  { transform: scale(1,1)    translateY(0); }
+  100% { transform: scale(1,1)    translateY(0); }
+`
+
+export const PositionUpdater = styled.div<{ up: boolean }>`
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  box-shadow: 0 0 0 rgb(244,157,22);
+  color: ${p => p.up ? '#00ff00' : '#f12806'};
+  transform: ${p => p.up ? 'none' : 'rotate(180deg)'};
+  animation: ${p => p.up ? pulseGreen : pulseRed}  1s ease-in-out infinite;
+  svg {
+    animation: ${bounce} 2s ease-in-out infinite;
+  }
 `
 
 export const Info = styled.button`

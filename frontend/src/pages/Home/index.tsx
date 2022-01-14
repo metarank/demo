@@ -66,9 +66,10 @@ export default () => {
       <Styled.CompareContainer comparing={comparing}>
         <Styled.ItemsList comparing={comparing}>
           {
-            response?.personalized_movies.map((item: any) =>
+            response?.personalized_movies.map((item: any, index) =>
               <MovieItem
                 key={item.id}
+                index={index}
                 item={item}
                 onClick={() => onClickItem(response.id, response.tag, item)}
                 id={response.id}
