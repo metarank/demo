@@ -43,21 +43,23 @@ export default () => {
         <Styled.Note>
           <p>
             This demo is built using the <a href='https://github.com/metarank/ranklens' title='Ranklens'>Ranklens</a> dataset and utilizes both capabilities of Metarank.
-            You can select one of the tags (or get a random one) to see the personalized selection of movies. The actions you take will diretly affect the result you see, as well as the features that are computed in real-time by Metarank.
+            You can select one of the provided movie to see the a personalized selection of movies. The actions you take will diretly affect the result you see, as well as the features that are computed in real-time by <a href="https://github.com/metarank/metarank" title="Metarank">Metarank</a>.
           </p>
           <p>
             You can compare personalized results with non-personalized directly on the page.
-            Don't hesitate to reach out to us if you have any questions or are interested in how Metarank can solve your problems!
+            Don't hesitate to <a href="https://ov3hbl6ltfo.typeform.com/to/rAcsuhiu" title="reach out">reach out to us</a> if you have any questions or are interested in how Metarank can be applied to implement Machine Learning personalization in your case!
           </p>
         </Styled.Note>
   
         <MovieTypes options={tags} onSelect={setCategory} selected={category} />
 
         <Styled.Menu>
+          {/* 
           <button>
             View log
           </button>
           <hr />
+          */ }
           <button onClick={() => setComparing(!comparing)}>
             Compare to IMDB
           </button>
