@@ -58,6 +58,9 @@ export const Note = styled.div`
   font-size: 16px;
   opacity: .7;
   max-width: 67%;
+  @media (max-width: 630px) {
+    max-width: 100%;
+  }
   p {
     line-height: 1.4;
   }
