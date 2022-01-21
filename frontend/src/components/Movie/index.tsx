@@ -42,7 +42,6 @@ export default ({
   }, {})
 
   const handleClick = useCallback((e) => {
-    console.log('click')
     onClick && id && onClick(id, item)
   }, [])
 
@@ -52,7 +51,7 @@ export default ({
     setTimeout(() => setChangedPosition(0), 2000)
   }, [index])
   return (
-    <Styled.Wrap onClick={handleClick} disabled={!onClick}>
+    <Styled.Wrap disabled={!onClick}>
       <Styled.Container style={{ backgroundImage: `url(${getImageUrl(item)})` }}>
         {/* {id && item.features.map((m) => <div>{m.name || m.names?.join(',')}: {m.values?.join(',') || m.value}</div>)} */}
         {

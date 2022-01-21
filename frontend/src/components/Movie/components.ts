@@ -132,6 +132,14 @@ export const Explain = styled.div`
     padding-left: 0;
     padding-right: 100%;
   }
+  @media (max-width: 630px){
+    ${Wrap}:nth-child(2n) &{
+      left: auto;
+      right: -5px;
+      padding-left: 0;
+      padding-right: 100%;
+    }
+  }
   ${Info}:focus ~ &, &:hover{
     display: flex;
   }
