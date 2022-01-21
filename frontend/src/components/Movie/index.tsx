@@ -42,8 +42,7 @@ export default ({
   }, {})
 
   const handleClick = useCallback((e) => {
-    console.log(e)
-    if (e.defaultPrevented) return
+    console.log('click')
     onClick && id && onClick(id, item)
   }, [])
 
@@ -59,7 +58,7 @@ export default ({
         {
           !disabled &&
           <>
-            <Styled.Hover>
+            <Styled.Hover onClick={handleClick}>
               <ArrowUpCircle width={60} height={60} />
               <span>Promote</span>
             </Styled.Hover>

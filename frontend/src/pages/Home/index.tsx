@@ -6,7 +6,6 @@ import { MovieResponseType, MovieType } from '../../../../server/src/models/movi
 import Hero from '../../components/Hero';
 import MovieTypes from '../../components/MovieTypes';
 import tags from '../../assets/top_tags.json';
-import { ChevronRight, ChevronsRight, Terminal } from 'react-feather';
 
 const user = (Math.random() + 1).toString(36).substring(7);
 const session = (Math.random() + 1).toString(36).substring(7);
@@ -54,12 +53,6 @@ export default () => {
         <MovieTypes options={tags} onSelect={setCategory} selected={category} />
 
         <Styled.Menu>
-          {/* 
-          <button>
-            View log
-          </button>
-          <hr />
-          */ }
           <button onClick={() => setComparing(!comparing)}>
             Compare to IMDB
           </button>

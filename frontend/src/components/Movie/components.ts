@@ -8,6 +8,12 @@ export const Wrap = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
+  @media (max-width: 600px) {
+    width: 50%;
+  }
+  @media (max-width: 300px) {
+    width: 100%;
+  }
 `
 
 export const Hover = styled.div`
