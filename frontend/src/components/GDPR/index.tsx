@@ -17,8 +17,7 @@ export default function GDPR() {
   return (
     <Styled.Container>
       <p>
-        We use first-party and third-party cookies for analytical purposes and to show you advertising
-        related to your preferences, based on your browsing habits and profile.
+        We use third-party cookies for analytical purposes. For more information, please consult our <a href="https://www.metarank.ai/cookie-policy.html" target="_blank">Cookie policy</a>
       </p>
       <button onClick={onClose}>
         <X width={10} height={10} />
