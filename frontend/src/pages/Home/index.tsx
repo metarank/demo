@@ -10,6 +10,8 @@ import tags from '../../assets/top_tags.json';
 const user = (Math.random() + 1).toString(36).substring(7);
 const session = (Math.random() + 1).toString(36).substring(7);
 
+const delay = (time: number) => new Promise((r) => setTimeout(r, time));
+
 export default () => {
   const [response, setItems] = useState<MovieResponseType>();
   const [cache, setCache] = useState<MovieType[]>([]);
@@ -24,6 +26,8 @@ export default () => {
     setCache(c => [...c, item]);
 
     await api.post(`/click`, { user, session, item: item.id.toString(), ranking: id });
+
+    await delay(1000);
 
     api.get<MovieResponseType>(`/movies?user=${user}&session=${session}&tag=${tag}`).then((response) => setItems(response.data));
   }, [])
@@ -42,7 +46,7 @@ export default () => {
         <Styled.Note>
           <p>
             This demo is built using the <a href='https://github.com/metarank/ranklens' title='Ranklens'>Ranklens</a> dataset and utilizes both capabilities of Metarank.
-            You can select one of the provided movie to see the a personalized selection of movies. The actions you take will diretly affect the result you see, as well as the features that are computed in real-time by <a href="https://github.com/metarank/metarank" title="Metarank">Metarank</a>.
+            You can select one of the provided movie to see the a personalized selection of movies. The actions you take will directly affect the result you see, as well as the features that are computed in real-time by <a href="https://github.com/metarank/metarank" title="Metarank">Metarank</a>.
           </p>
           <p>
             You can compare personalized results with non-personalized directly on the page.
