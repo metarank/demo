@@ -11,6 +11,7 @@ services:
     environment:
       - ADDRESS=0.0.0.0
       - METARANK_URL=${METARANK_URL}
+      - MODEL_NAME=${MODEL_NAME}
     ports:
       - '3001:3001'
   frontend:

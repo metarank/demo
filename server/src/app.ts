@@ -25,6 +25,10 @@ async function main() {
   });
 
   fastifyInstance.listen(PORT, ADDRESS, () => console.log(`Listening API on ${ADDRESS}:${PORT}!`));
+
+  process.on('unhandledRejection', (e) => {
+    console.error(e);
+  });
 }
 
 // eslint-disable-next-line no-void

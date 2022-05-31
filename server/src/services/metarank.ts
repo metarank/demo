@@ -4,6 +4,10 @@ import { v4 } from 'uuid';
 
 const METARANK_URL = process.env.METARANK_URL || '';
 
+// specify the model name from your Metarank YAML configuration file
+// by default the model name from Ranklens is used
+const MODEL_NAME = process.env.MODEL_NAME || 'xgboost';
+
 export async function rank(user: string, session: string, id: string, items: MovieDataStorageModelType): Promise<MovieDataStorageModelType> {
   const data: MetarankRankRequest = {
     event: 'ranking',
@@ -16,7 +20,7 @@ export async function rank(user: string, session: string, id: string, items: Mov
     timestamp: +Date.now(),
   };
 
-  const response = await axios.post<MetarankRankResponse>(`${METARANK_URL}/rank?explain=true`, data);
+  const response = await axios.post<MetarankRankResponse>(`${METARANK_URL}/rank/${MODEL_NAME}?explain=true`, data);
 
   const personalizationResponse = response.data;
 

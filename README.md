@@ -11,8 +11,8 @@ We also use [Yarn](https://yarnpkg.com/) for package management (`npm i -g yarn`
 
 You can easily run the project with `docker-compose`:
 
-* run `docker-compose buiild` to build the images
-* run `METARANK_URL=SOME-URL docker-compose up` to run the images
+* run `docker-compose build` to build the images
+* run `METARANK_URL=SOME-URL MODEL_NAME=SOME-MODEL docker-compose up` to run the images
 
 You can access the frontend application at `localhost:3000` when both containers are running.
 
@@ -33,6 +33,7 @@ You still need to provide the `METARANK_URL` environment variable, e.g. `METARAN
 
 ### run the backend
 * use `METARANK_URL` environment variable to provide the URL of your Metarank installation in the format `http://localhost:8080`
+* use `MODEL_NAME` environment variable to specify the name of the Metarank model from your configuration file. By default it's `xgboost` as in the [Ranklens Demo](https://github.com/metarank/metarank/blob/master/src/test/resources/ranklens/config.yml)
 * use `PORT` environment vvaraible to provide the port on which API will run. By default port 3001 is used
 * `cd server && npm run start` to run application
 
