@@ -30,12 +30,8 @@ export const MovieModel = Type.Object({
   writer: Type.Union([Type.Null(), Type.Optional(personModel)]),
   poster: Type.String(),
   personalization_score: Type.Number(),
-  features: Type.Array(Type.Object({
-    name: Type.Optional(Type.String()),
-    value: Type.Optional(Type.Number()),
-    names: Type.Optional(Type.Array(Type.String())),
-    values: Type.Optional(Type.Array(Type.Number())),
-  })),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  features: Type.Any(),
 });
 
 export const MovieResponse = Type.Object({

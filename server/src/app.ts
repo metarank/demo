@@ -1,5 +1,5 @@
 import * as fastify from 'fastify';
-import cors from 'fastify-cors';
+import cors from '@fastify/cors';
 
 import routes from './routes';
 
@@ -22,6 +22,8 @@ async function main() {
 
     // generic error
     await res.code(500);
+
+    return {};
   });
 
   fastifyInstance.listen(PORT, ADDRESS, () => console.log(`Listening API on ${ADDRESS}:${PORT}!`));
