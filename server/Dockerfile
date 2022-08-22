@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:16-alpine
 ENV ADDRESS=0.0.0.0
 
 
@@ -6,7 +6,7 @@ WORKDIR /base
 
 COPY package*.json .
 
-RUN npm ci --production
+RUN npm ci
 
 COPY . .
 

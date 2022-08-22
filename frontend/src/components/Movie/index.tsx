@@ -25,22 +25,7 @@ export default ({
   const _index = useRef(index)
 
   const [changedPosition, setChangedPosition] = useState(0)
-
-  const [meta, _stats] = useMemo(() =>
-    item.features.reduce((acc: any, i: any) => {
-      acc[i.name ? 0 : 1].push(i);
-      return acc
-    }, [[], []]),
-    [item]
-  )
   
-  const stats = _stats.reduce((acc: Record<string, unknown>, { names, values }: any) => {
-    names.forEach((n: string, index: number) => {
-      if (values[index]) acc[n] = values[index]
-    })
-    return acc;
-  }, {})
-
   const handleClick = useCallback((e) => {
     onClick && id && onClick(id, item)
   }, [])
@@ -73,13 +58,13 @@ export default ({
             <Styled.Explain> 
               <div>
                 <h4>Rank:</h4>
-                {id && Object.keys(stats).map((key:any) =>
-                  <Styled.Line>{key}: <strong>{stats[key]}</strong></Styled.Line>)
+                {id && Object.keys(item.features).map((key:any) =>
+                  <Styled.Line>{key}: <strong>{Array.isArray(item.features[key]) ? item.features[key].join(',') : item.features[key]}</strong></Styled.Line>)
                 }
-                <h4>Meta:</h4>
+                {/* <h4>Meta:</h4>
                 {id && meta.map((m:any) =>
                   <Styled.Line>{m.name || m.names?.join(',')}: <strong>{m.values?.join(',') || m.value}</strong></Styled.Line>)
-                }
+                } */}
               </div>
             </Styled.Explain>
           </>
