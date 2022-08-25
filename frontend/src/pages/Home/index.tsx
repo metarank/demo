@@ -19,7 +19,7 @@ export default () => {
   const [comparing, setComparing] = useState<boolean>(false);
 
   useEffect(() => {
-    api.get<MovieResponseType>(`/movies?user=${user}&session=${session}`).then((response) => setItems(response.data));
+    api.get<MovieResponseType>(`/movies?limit=12&user=${user}&session=${session}`).then((response) => setItems(response.data));
   }, []);
 
   const onClickItem = useCallback(async (id: string, tag: string, item: MovieType) => {
@@ -29,12 +29,12 @@ export default () => {
 
     await delay(1000);
 
-    api.get<MovieResponseType>(`/movies?user=${user}&session=${session}&tag=${tag}`).then((response) => setItems(response.data));
+    api.get<MovieResponseType>(`/movies?limit=12&user=${user}&session=${session}&tag=${tag}`).then((response) => setItems(response.data));
   }, [])
 
   useEffect(() => {
     if (!category) return
-    api.get<MovieResponseType>(`/movies?user=${user}&session=${session}&tag=${category}`).then((response) => setItems(response.data));
+    api.get<MovieResponseType>(`/movies?limit=12&user=${user}&session=${session}&tag=${category}`).then((response) => setItems(response.data));
   }, [category])
 
   return (
