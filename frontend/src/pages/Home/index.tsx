@@ -27,7 +27,7 @@ export default () => {
 
     await api.post(`/click`, { user, session, item: item.id.toString(), ranking: id });
 
-    await delay(1000);
+    // await delay(1000);
 
     api.get<MovieResponseType>(`/movies?limit=12&user=${user}&session=${session}&tag=${tag}`).then((response) => setItems(response.data));
   }, [])
